@@ -3,13 +3,14 @@ import pandas as pd
 from datetime import datetime
 import re
 import requests
+import subprocess
 
 # === CONFIGURATION ===
 INPUT_DIR = "input_files"
 LOG_DIR = "logs"
 ALL_ERRORS = []
 
-SLACK_WEBHOOK = "https://hooks.slack.com/services/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"  # <-- your actual webhook
+SLACK_WEBHOOK = "https://hooks.slack.com/services/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"
 
 # === SLACK ALERT FUNCTION ===
 def send_slack_alert(message):
@@ -35,6 +36,17 @@ def log_error(file, error):
 
     # Add to global error summary
     ALL_ERRORS.append(f"📂 File: {file}\n❌ {error}")
+
+
+
+def push_log_to_github(branch_name="SCRUM-1-slack-alerts"):
+    try:
+        subprocess.run(["git", "add", "logs/dq_errors.log"], check=True)
+        subprocess.run(["git", "commit", "-m", "Update DQ log file"], check=True)
+        subprocess.run(["git", "push", "origin", branch_name], check=True)
+        print("✅ Log file pushed to GitHub successfully.")
+    except subprocess.CalledProcessError as e:
+        print("❌ Failed to push log file:", e)
 
 # === DATA QUALITY CHECKS ===
 
@@ -136,6 +148,12 @@ def run_checks(file_path, file):
 # === MAIN SCRIPT ===
 if __name__ == "__main__":
     os.makedirs(LOG_DIR, exist_ok=True)
+
+    # ✅ Clear old log file on every run
+    log_file_path = os.path.join(LOG_DIR, "dq_errors.log")
+    with open(log_file_path, "w") as f:
+        f.write("")  # Clear contents
+
     for file in os.listdir(INPUT_DIR):
         if file.endswith(".csv"):
             path = os.path.join(INPUT_DIR, file)
@@ -146,5 +164,8 @@ if __name__ == "__main__":
     if ALL_ERRORS:
         alert_message = "🚨 *Data Quality Issues Detected*\n-----------------------------------\n"
         alert_message += "\n\n".join(ALL_ERRORS)
-        alert_message += "\n\n🧾 See logs in dq_errors.log for full trace."
+        GITHUB_RAW_LOG_LINK = "https://raw.githubusercontent.com/shubham1edu/data-quality-bot/SCRUM-1-slack-alerts/logs/dq_errors.log"
+        alert_message += f"\n\n🧾 [Click to view full logs]({GITHUB_RAW_LOG_LINK})"
+
         send_slack_alert(alert_message)
+        push_log_to_github()
