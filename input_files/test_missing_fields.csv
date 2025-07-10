@@ -1,0 +1,3 @@
+Trade_ID,Account_ID,Trade_Date,Settlement_Date,Amount
+T009,AC009,2025-07-08,2025-07-09,1000
+,AC010,2025-07-08,2025-07-09,1200
