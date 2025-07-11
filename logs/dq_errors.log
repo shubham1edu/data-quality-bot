@@ -1,7 +1,7 @@
-2025-07-11 08:31:34 | ❌ ERROR in file 'test_negative_zero.csv': 'Amount' column has negative or zero values
-2025-07-11 08:31:34 | ❌ ERROR in file 'test_enum_violation.csv': Invalid enum values in 'Region' column
-2025-07-11 08:31:34 | ❌ ERROR in file 'test_invalid_dates.csv': Missing values in fields: Trade_Date
-2025-07-11 08:31:34 | ❌ ERROR in file 'test_cross_field.csv': Cross-field violation: Trade_Date > Settlement_Date
-2025-07-11 08:31:34 | ❌ ERROR in file 'test_type_mismatch.csv': Invalid characters found in 'Account_ID' (only A-Z, a-z, 0-9 allowed)
-2025-07-11 08:31:34 | ❌ ERROR in file 'test_duplicates.csv': Duplicate rows found in file
-2025-07-11 08:31:34 | ❌ ERROR in file 'test_missing_fields.csv': Missing values in fields: Trade_ID
+2025-07-11 09:39:09 | ❌ ERROR in file 'test_negative_zero.csv': 'Amount' column has negative or zero values
+2025-07-11 09:39:09 | ❌ ERROR in file 'test_enum_violation.csv': Invalid enum values in 'Region' column
+2025-07-11 09:39:09 | ❌ ERROR in file 'test_invalid_dates.csv': Missing values in fields: Trade_Date
+2025-07-11 09:39:09 | ❌ ERROR in file 'test_cross_field.csv': Cross-field violation: Trade_Date > Settlement_Date
+2025-07-11 09:39:09 | ❌ ERROR in file 'test_type_mismatch.csv': Invalid characters found in 'Account_ID' (only A-Z, a-z, 0-9 allowed)
+2025-07-11 09:39:09 | ❌ ERROR in file 'test_duplicates.csv': Duplicate rows found in file
+2025-07-11 09:39:09 | ❌ ERROR in file 'test_missing_fields.csv': Missing values in fields: Trade_ID
